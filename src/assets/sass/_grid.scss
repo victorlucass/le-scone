@@ -1,0 +1,115 @@
+// variáveis
+// -------------------
+$cols: 12;
+$gutter: 20px;
+$l-device: 1200px;
+$m-device: 760px;
+$s-device: 480px;
+
+// box-sizing
+// ------------------
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+// mixins e funções
+// -------------------
+@mixin device($device) {
+  @if $device== "l" {
+    @media screen and (min-width: $l-device) {
+      @content;
+    }
+  } @else if $device == "m" {
+    @media screen and (min-width: $m-device) and (max-width: #{$l-device - 1}) {
+      @content;
+    }
+  } @else if $device == "s" {
+    @media screen and (min-width: $s-device) and (max-width: #{$m-device - 1}) {
+      @content;
+    }
+  }
+}
+
+@function grid($col, $offset: false) {
+  $width: $col / $cols * 100 * 1%;
+  $result: calc(#{$width} - #{$gutter});
+  @if $offset == true {
+    $gutter: $gutter/2;
+    $result: calc(#{$width} + #{$gutter});
+  }
+  @return $result;
+}
+
+// gerando classes grid
+// --------------------
+
+@for $i from 1 to $cols {
+  .grid-#{$i} {
+    width: grid($i);
+  }
+}
+
+// estrutura do grid
+// -------------------
+@mixin grid-structure {
+  float: left;
+  min-height: 1;
+  margin-right: calc($gutter / 2);
+  margin-left: calc($gutter / 2);
+  @include device(s) {
+    width: 100%;
+    float: none;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+}
+
+[class^="grid-"] {
+  @include grid-structure;
+}
+
+// gerando classes do offset
+// -------------------------
+@for $i from 1 to $cols {
+  .offset-#{$i} {
+    margin-left: grid($i, true);
+    @extend %offset;
+  }
+}
+
+@include device(s) {
+  %offset {
+    margin-right: 0px;
+  }
+}
+
+// mixin de clearfix
+// --------------------------
+@mixin clearfix {
+  &::after,
+  &::before {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin container {
+  max-width: $l-device;
+  margin: 0 auto;
+  @include device(m) {
+    max-width: $m-device;
+  }
+  @include device(s) {
+    max-width: $s-device;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  @include clearfix;
+}
+
+.container {
+  @include container;
+}
