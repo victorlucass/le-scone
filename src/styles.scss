@@ -1,2 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../src/assets/sass/reset';
+@import "../src/assets/sass/index";
+
+body {
+  background-color: $bege-claro;
+  border: 10px solid $bege-medio;
+  color: $cinza;
+
+  @include device(s) {
+    border: none;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.titulo {
+  @include tipo-1(18);
+  text-transform: uppercase;
+  @include device(s) {
+    margin-bottom: 40px;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 75%;
+    float: right;
+    height: 2px;
+    background: $cinza;
+    margin-top: transformEm(14);
+    @include device(m) {
+      width: 60%;
+    }
+  }
+}
+
+p {
+  @include tipo-1(18); 
+}

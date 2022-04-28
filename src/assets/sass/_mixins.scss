@@ -1,0 +1,25 @@
+@import 'tipografia';
+
+@function transformEm($px, $contexto: 16){
+    @return $px / $contexto * 1em;
+}
+
+@mixin tipo-1($size) {
+    font-family: $fonte-primaria;
+    @if $size == 18 {
+        font-size: transformEm(18);
+        line-height: transformEm(30,18);
+    }
+}
+
+@mixin tipo-2($size) {
+    font-family: $fonte-secundaria;
+    @if $size == 18 {
+        font-size: transformEm(18);
+        line-height: transformEm(30,18);
+    }
+    @else if $size == 24 {
+        font-size: transformEm(24);
+        line-height: transformEm(30,24);
+    }
+}

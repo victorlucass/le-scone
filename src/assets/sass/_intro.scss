@@ -1,0 +1,60 @@
+.intro {
+    margin-top: transformEm(60);
+    @include device(s){
+        margin-top: transformEm(20);
+    }
+}
+
+.logo {
+    margin-bottom: transformEm(20);
+}
+
+.intro-info {
+    border-right: 2px solid $cinza;
+    max-width: transformEm(320);
+    p {
+        padding: 10px 0px;
+        &:first-child {
+            border-bottom: 2px solid $cinza;
+        }
+    }
+}
+
+.intro-telefone {
+    color: $bege-escuro;
+    @include device(s) {
+        margin-bottom: 40px;
+    }
+
+    &:after {
+        content: '/ / / /';
+        display: block;
+        margin-top: 200px;
+        color: $cinza;
+        font-size: 220px;
+        letter-spacing: -90px;
+        @include device(m) {
+            margin-top: 80px;
+            font-size: 160px;
+            letter-spacing: -70px;
+        }
+
+        @include device(s) {
+            display: none;
+        }
+    }
+}
+
+.icon-status {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    margin-left: 30px;
+    background-color: $verde;
+}
+
+.intro-foto {
+    border: 10px solid $bege-escuro;
+    width: 100%; 
+}
